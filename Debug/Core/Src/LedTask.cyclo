@@ -1,2 +1,2 @@
-../Core/Src/LedTask.c:8:6:createLedTask	1
-../Core/Src/LedTask.c:12:6:ledToggleTask	1
+../Core/Src/LedTask.c:11:6:createLedTask	1
+../Core/Src/LedTask.c:23:6:ledToggleTask	2

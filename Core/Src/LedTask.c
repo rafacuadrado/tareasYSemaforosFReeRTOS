@@ -10,6 +10,7 @@ void createLedTask(){
 
 }
 void ledToggleTask(void * pargs){
+	while(1){
 	LED_Toggle(1);
-	vTaskDelay(300);
+	vTaskDelay(300);}
 }

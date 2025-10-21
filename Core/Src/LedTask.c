@@ -7,9 +7,10 @@
 #include "LedTask.h"
 int led1=1;
 int led2=2;
+TaskHandle_t taskHandler;
 
 void createLedTask(){
-	xTaskCreate(ledToggleTask, "ledToggleTask 1", 128, &led1, 1, NULL);
+	xTaskCreate(ledToggleTask, "ledToggleTask 1", 128, &led1, 1,NULL);
 	xTaskCreate(ledToggleTask, "ledToggleTask 2", 128, &led2, 2, NULL);
 	//xTaskCreate(ledToggleTask, "ledToggleTask 2", 128, &led2, 1, NULL);
 
@@ -45,3 +46,24 @@ void ledToggleTask(void * pargs){
 	}
 	}
 }
+void ledToggleTask2(void * pargs){
+	while(1){
+	int led=*(int*)pargs;
+	if(led==1){
+		LED_Toggle(1);
+		vTaskDelay(100);
+		LED_Toggle(1);
+		vTaskDelay(100);
+		LED_Toggle(1);
+		vTaskDelay(100);
+		LED_Toggle(1);
+		vTaskDelay(100);
+		LED_Toggle(1);
+		vTaskDelay(100);
+	}
+	xTaskCreate(ledToggleTask2, "ledToggleTask 2", 128, &led2, 2, NULL);
+
+	vTaskDelete(NULL);
+
+}
+

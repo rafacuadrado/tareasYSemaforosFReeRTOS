@@ -15,6 +15,11 @@
 void createLedTask();
 void ledToggleTask(void * pargs);
 void ledToggleTask2(void * pargs);
+void animationLedTask(void * pargs);
+void animation1(void * pargs);
+void animation2(void * pargs);
+void animation3(void * pargs);
+void animation4(void * pargs);
 
 
 #endif /* SRC_LEDTASK_H_ */

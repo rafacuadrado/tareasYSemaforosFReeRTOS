@@ -1,4 +1,5 @@
 ../Core/Src/LedTask.c:12:6:createLedTask	16	static
-../Core/Src/LedTask.c:25:6:ledToggleTaskej1b	24	static
-../Core/Src/LedTask.c:37:6:ledToggleTask	24	static
-../Core/Src/LedTask.c:49:6:ledToggleTask2	32	static
+../Core/Src/LedTask.c:26:6:ledToggleTaskej1b	24	static
+../Core/Src/LedTask.c:38:6:ledToggleTask	24	static
+../Core/Src/LedTask.c:50:6:animationLedTask	32	static
+../Core/Src/LedTask.c:70:6:ledToggleTask2	32	static

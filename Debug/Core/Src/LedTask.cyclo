@@ -1,4 +1,5 @@
 ../Core/Src/LedTask.c:12:6:createLedTask	1
-../Core/Src/LedTask.c:25:6:ledToggleTaskej1b	2
-../Core/Src/LedTask.c:37:6:ledToggleTask	2
-../Core/Src/LedTask.c:49:6:ledToggleTask2	2
+../Core/Src/LedTask.c:26:6:ledToggleTaskej1b	2
+../Core/Src/LedTask.c:38:6:ledToggleTask	2
+../Core/Src/LedTask.c:50:6:animationLedTask	5
+../Core/Src/LedTask.c:70:6:ledToggleTask2	2

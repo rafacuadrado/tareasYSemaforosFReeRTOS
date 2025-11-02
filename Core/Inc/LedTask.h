@@ -14,6 +14,7 @@
 #include "joy_driver.h"
 void createLedTask();
 void ledToggleTask(void * pargs);
+void ledToggleTask2(void * pargs);
 
 
 #endif /* SRC_LEDTASK_H_ */

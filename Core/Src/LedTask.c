@@ -10,10 +10,10 @@ int led2=2;
 TaskHandle_t taskHandler;
 
 void createLedTask(){
-	xTaskCreate(ledToggleTask, "ledToggleTask 1", 128, &led1, 1,NULL);
-	xTaskCreate(ledToggleTask, "ledToggleTask 2", 128, &led2, 2, NULL);
+	//xTaskCreate(ledToggleTask, "ledToggleTask 1", 128, &led1, 1,NULL);
+	//xTaskCreate(ledToggleTask, "ledToggleTask 2", 128, &led2, 2, NULL);
 	//xTaskCreate(ledToggleTask, "ledToggleTask 2", 128, &led2, 1, NULL);
-
+	xTaskCreate(ledToggleTask2, "ledToggleTask 1", 128, &led1, 1,NULL);
 }
 /*
 void ledToggleTaskej1(void * pargs){
@@ -60,10 +60,23 @@ void ledToggleTask2(void * pargs){
 		vTaskDelay(100);
 		LED_Toggle(1);
 		vTaskDelay(100);
+		xTaskCreate(ledToggleTask2, "ledToggleTask 2", 128, &led2, 2, NULL);
+	}else{
+		LED_Toggle(2);
+		vTaskDelay(100);
+		LED_Toggle(2);
+		vTaskDelay(100);
+		LED_Toggle(2);
+		vTaskDelay(100);
+		LED_Toggle(2);
+		vTaskDelay(100);
+		LED_Toggle(2);
+		vTaskDelay(100);
+		xTaskCreate(ledToggleTask2, "ledToggleTask 2", 128, &led1, 2, NULL);
 	}
-	xTaskCreate(ledToggleTask2, "ledToggleTask 2", 128, &led2, 2, NULL);
+
 
 	vTaskDelete(NULL);
 
-}
+}}
 

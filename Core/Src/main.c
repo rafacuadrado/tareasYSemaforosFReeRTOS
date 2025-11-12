@@ -129,7 +129,8 @@ int main(void)
 
 
   /* USER CODE BEGIN RTOS_THREADS */
-  createLedTask();
+  //createLedTask();
+  createButtonTask();
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
 

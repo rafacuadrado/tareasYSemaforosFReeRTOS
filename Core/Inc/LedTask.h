@@ -13,6 +13,8 @@
 #include "led_driver.h"
 #include "joy_driver.h"
 void createLedTask();
+void createButtonTask();
+void buttonTask(void * pargs);
 void ledToggleTask(void * pargs);
 void ledToggleTask2(void * pargs);
 void animationLedTask2(void * pargs);

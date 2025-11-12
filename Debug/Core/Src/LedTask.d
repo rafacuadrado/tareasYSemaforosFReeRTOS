@@ -36,7 +36,8 @@ Core/Src/LedTask.o: ../Core/Src/LedTask.c ../Core/Inc/LedTask.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
- ../Core/Inc/led_driver.h ../Core/Inc/joy_driver.h
+ ../Core/Inc/led_driver.h ../Core/Inc/joy_driver.h \
+ ../Core/Inc/joy_driver.h
 ../Core/Inc/LedTask.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../Core/Inc/stm32l4xx_hal_conf.h:
@@ -76,4 +77,5 @@ Core/Src/LedTask.o: ../Core/Src/LedTask.c ../Core/Inc/LedTask.h \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
 ../Core/Inc/led_driver.h:
+../Core/Inc/joy_driver.h:
 ../Core/Inc/joy_driver.h:

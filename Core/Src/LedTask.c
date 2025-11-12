@@ -5,9 +5,12 @@
  *      Author: rafac
  */
 #include "LedTask.h"
+#include "joy_driver.h"
 int led1=1;
 int led2=2;
-TaskHandle_t taskHandler;
+int clave=0;
+TaskHandle_t taskHandler[5];
+
 
 void createLedTask(){
 	//xTaskCreate(ledToggleTask, "ledToggleTask 1", 128, &led1, 1,NULL);
@@ -15,10 +18,29 @@ void createLedTask(){
 	//xTaskCreate(ledToggleTask, "ledToggleTask 2", 128, &led2, 1, NULL);
 	//xTaskCreate(ledToggleTask2, "ledToggleTask 1", 128, &led1, 1,NULL);
 	// Ej 4
-	//xTaskCreate(animationLedTask1, "ledToggleTask 1", 128,NULL, 1,NULL);
+	//xTaskCreate(animationLedTask1, "animaciones sin tareas", 128,NULL, 1,NULL);
 	// Ej 5
-	xTaskCreate(animationLedTask2, "ledToggleTask 1", 128,NULL, 1,NULL);
+	xTaskCreate(animationLedTask2, "animaciones con tareas", 128,NULL, 1,NULL);
 }
+void createButtonTask(){
+	xTaskCreate(buttonTask, "testBotón", 128,NULL, 1,NULL);
+	xTaskCreate(animation1Task, "animación 1", 128, NULL,1,&taskHandler[1]);
+	xTaskCreate(animation2Task, "animación 1", 128, NULL,1,&taskHandler[2]);
+	xTaskCreate(animation3Task, "animación 1", 128, NULL,1,&taskHandler[3]);
+	xTaskCreate(animation4Task, "animación 1", 128, NULL,1,&taskHandler[4]);
+
+
+}
+void buttonTask(void * pargs){
+
+	while(1){
+		clave=ReadJoy();
+		if(clave!=0){
+			xTaskNotifyGive(taskHandler[clave]);
+		}
+	}
+}
+
 /*
 void ledToggleTaskej1(void * pargs){
 	while(1){
@@ -93,6 +115,7 @@ void animationLedTask2(void * pargs){
 	}
 }
 
+
 void ledToggleTask2(void * pargs){
 	while(1){
 	int led=*(int*)pargs;
@@ -164,6 +187,7 @@ void animation3(void){
 
 }
 void animation4(void){
+
 	for(int i = 0; i<25; i++){
 		LED_On(0);
 		LED_On(1);
@@ -180,6 +204,8 @@ void animation4(void){
 	void animation1Task(void * pargs){
 		while(1)
 		{
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+
 		/*LED_On(0);
 		LED_On(1);
 		LED_On(2);
@@ -188,10 +214,12 @@ void animation4(void){
 		LED_Off(1);
 		LED_Off(2);*/
 		animation1();
-		vTaskDelete(NULL);
 		}
 	}
 	void animation2Task(void * pargs){
+		while(1){
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+
 		LED_On(0);
 		HAL_Delay(150);
 		LED_On(1);
@@ -203,9 +231,11 @@ void animation4(void){
 		LED_Off(1);
 		HAL_Delay(150);
 		LED_Off(2);
-		vTaskDelete(NULL);
+		}
 	}
 	void animation3Task(void * pargs){
+		while(1){ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+
 		LED_On(0);
 		HAL_Delay(500);
 		LED_Off(0);
@@ -215,21 +245,25 @@ void animation4(void){
 		LED_On(2);
 		HAL_Delay(500);
 		LED_Off(2);
-		vTaskDelete(NULL);
+		}
 
 	}
 	void animation4Task(void * pargs){
-		for(int i = 0; i<25; i++){
-			LED_On(0);
-			LED_On(1);
-			LED_On(2);
-			HAL_Delay(150);
-			LED_Off(0);
-			LED_Off(1);
-			LED_Off(2);
-			HAL_Delay(150);
+		while(1){
+			ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+			for(int i = 0; i<25; i++){
+						LED_On(0);
+						LED_On(1);
+						LED_On(2);
+						HAL_Delay(150);
+						LED_Off(0);
+						LED_Off(1);
+						LED_Off(2);
+						HAL_Delay(150);
+					}
 		}
-		vTaskDelete(NULL);
+
+
 	}
 
 

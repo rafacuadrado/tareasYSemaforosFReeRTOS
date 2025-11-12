@@ -11,7 +11,6 @@ uint8_t antes = GPIO_PIN_SET;
 uint8_t actual;
 
 
-
 uint8_t ReadJoy(){
 
 	//Queremos que cada vez que reciba un 0
@@ -30,3 +29,7 @@ uint8_t ReadJoy(){
 
 	return cont;
 }
+
+
+
+

@@ -14,7 +14,10 @@ void createLedTask(){
 	//xTaskCreate(ledToggleTask, "ledToggleTask 2", 128, &led2, 2, NULL);
 	//xTaskCreate(ledToggleTask, "ledToggleTask 2", 128, &led2, 1, NULL);
 	//xTaskCreate(ledToggleTask2, "ledToggleTask 1", 128, &led1, 1,NULL);
-	xTaskCreate(animationLedTask, "ledToggleTask 1", 128,NULL, 1,NULL);
+	// Ej 4
+	//xTaskCreate(animationLedTask1, "ledToggleTask 1", 128,NULL, 1,NULL);
+	// Ej 5
+	xTaskCreate(animationLedTask2, "ledToggleTask 1", 128,NULL, 1,NULL);
 }
 /*
 void ledToggleTaskej1(void * pargs){
@@ -37,36 +40,59 @@ void ledToggleTaskej1b(void * pargs){
 }
 void ledToggleTask(void * pargs){
 	while(1){
-	int led=*(int*)pargs;
-	if(led==1){
-		LED_Toggle(1);
-			vTaskDelay(100);
-	}else{
-		LED_Toggle(2);
-		vTaskDelay(300);
-	}
+		int led=*(int*)pargs;
+		if(led==1){
+			LED_Toggle(1);
+				vTaskDelay(100);
+		}else{
+			LED_Toggle(2);
+			vTaskDelay(300);
+		}
 	}
 }
-void animationLedTask(void * pargs){
+
+void animationLedTask1(void * pargs){
+	int res=0;
+	while(1){
+		res = ReadJoy();
+			  switch(res){
+				  case 1:
+					  animation1();
+					  break;
+				  case 2:
+					  animation2();
+				  	  break;
+				  case 3:
+					  animation3();
+					  break;
+				  case 4:
+					  animation4();
+					  break;
+			  }
+	}
+}
+void animationLedTask2(void * pargs){
 	int res=0;
 	while(1){
 
 		  res = ReadJoy();
 		  switch(res){
 		  case 1:
-			  xTaskCreate(animation1, "ledToggleTask 1", 128,NULL, 1,NULL);
+			  xTaskCreate(animation1Task, "ledToggleTask 1", 128,&led1, 1,NULL);
+			  break;
 		  case 2:
-			  xTaskCreate(animation2, "ledToggleTask 1", 128,NULL, 1,NULL);
-
+			  xTaskCreate(animation2Task, "ledToggleTask 1", 128,&led1, 1,NULL);
+			  break;
 		  case 3:
-			  xTaskCreate(animation3, "ledToggleTask 1", 128,NULL, 1,NULL);
-
+			  xTaskCreate(animation3Task, "ledToggleTask 1", 128,&led1, 1,NULL);
+			  break;
 		  case 4:
-			  xTaskCreate(animation4, "ledToggleTask 1", 128,NULL, 1,NULL);
-
-			  }
+			  xTaskCreate(animation4Task, "ledToggleTask 1", 128,&led1, 1,NULL);
+			  break;
+		}
 	}
 }
+
 void ledToggleTask2(void * pargs){
 	while(1){
 	int led=*(int*)pargs;
@@ -99,18 +125,73 @@ void ledToggleTask2(void * pargs){
 
 	vTaskDelete(NULL);
 
-	}
-	void animation1(void * pargs){
+	}}
+void animation1(void){
+	LED_On(0);
+	LED_On(1);
+	LED_On(2);
+	HAL_Delay(1500);
+	LED_Off(0);
+	LED_Off(1);
+	LED_Off(2);
+	//vTaskDelete(NULL);
+}
+void animation2(void){
+	LED_On(0);
+	HAL_Delay(150);
+	LED_On(1);
+	HAL_Delay(150);
+	LED_On(2);
+	HAL_Delay(150);
+	LED_Off(0);
+	HAL_Delay(150);
+	LED_Off(1);
+	HAL_Delay(150);
+	LED_Off(2);
+	//vTaskDelete(NULL);
+}
+void animation3(void){
+	LED_On(0);
+	HAL_Delay(500);
+	LED_Off(0);
+	LED_On(1);
+	HAL_Delay(500);
+	LED_Off(1);
+	LED_On(2);
+	HAL_Delay(500);
+	LED_Off(2);
+	//vTaskDelete(NULL);
+
+}
+void animation4(void){
+	for(int i = 0; i<25; i++){
 		LED_On(0);
+		LED_On(1);
+		LED_On(2);
+		HAL_Delay(150);
+		LED_Off(0);
+		LED_Off(1);
+		LED_Off(2);
+		HAL_Delay(150);
+	}
+	//vTaskDelete(NULL);
+}
+
+	void animation1Task(void * pargs){
+		while(1)
+		{
+		/*LED_On(0);
 		LED_On(1);
 		LED_On(2);
 		HAL_Delay(1500);
 		LED_Off(0);
 		LED_Off(1);
-		LED_Off(2);
+		LED_Off(2);*/
+		animation1();
 		vTaskDelete(NULL);
+		}
 	}
-	void animation2(void * pargs){
+	void animation2Task(void * pargs){
 		LED_On(0);
 		HAL_Delay(150);
 		LED_On(1);
@@ -122,8 +203,9 @@ void ledToggleTask2(void * pargs){
 		LED_Off(1);
 		HAL_Delay(150);
 		LED_Off(2);
+		vTaskDelete(NULL);
 	}
-	void animation3(void * pargs){
+	void animation3Task(void * pargs){
 		LED_On(0);
 		HAL_Delay(500);
 		LED_Off(0);
@@ -136,7 +218,7 @@ void ledToggleTask2(void * pargs){
 		vTaskDelete(NULL);
 
 	}
-	void animation4(void * pargs){
+	void animation4Task(void * pargs){
 		for(int i = 0; i<25; i++){
 			LED_On(0);
 			LED_On(1);
@@ -149,5 +231,5 @@ void ledToggleTask2(void * pargs){
 		}
 		vTaskDelete(NULL);
 	}
-}
+
 
